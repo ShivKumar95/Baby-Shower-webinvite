@@ -443,8 +443,8 @@
             <p class="text-slate-500 text-xs sm:text-sm mt-1" id="rsvp-deadline-copy">Please respond by <span class="font-semibold text-slate-700" id="rsvp-deadline-text">October 28, 2026</span> so we can finalize our catering count.</p>
           </div>
 
-          <!-- Netlify Ready HTML Form with Honeypot Anti-Spam -->
-          <form id="rsvpForm" name="baby-shower-rsvp" method="POST" netlify netlify-honeypot="bot-field" class="space-y-4">
+          <!-- RSVP form: submits to Google Forms (see GOOGLE_FORM config in the script) -->
+          <form id="rsvpForm" class="space-y-4">
             <p class="hidden">
               <label>Do not fill this if you are human: <input name="bot-field" id="bot-field"></label>
             </p>
@@ -508,11 +508,11 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
             <div>
               <label class="block text-[11px] font-semibold text-slate-600 mb-1">Your Name *</label>
-              <input type="text" id="wishName" required placeholder="Name" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
+              <input type="text" id="wishName" required placeholder="Aunt Clara" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
             </div>
             <div>
               <label class="block text-[11px] font-semibold text-slate-600 mb-1">Baby Prediction (Optional)</label>
-              <input type="text" id="wishPrediction" placeholder="e.g. Girl,Nov 11, 3.3 kg" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
+              <input type="text" id="wishPrediction" placeholder="e.g. Nov 11 • 3.3 kg" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
             </div>
           </div>
           <div class="mb-3">
@@ -534,9 +534,6 @@
     <div class="max-w-4xl mx-auto px-4 space-y-2">
       <p class="font-serif italic text-slate-700 text-base" id="footer-quote">May you be blessed with health, happiness and prosperity</p>
       <p class="text-slate-400" id="footer-description">With the blessings of elders, for Shivangi &amp; Shiv and Baby.</p>
-      <div class="pt-2 flex justify-center gap-3 text-slate-400">
-        <button onclick="openModal('deployHelpModal')" class="hover:text-emerald-600 transition underline underline-offset-2">Netlify Instructions</button>
-      </div>
     </div>
   </footer>
 
@@ -715,46 +712,6 @@
     </div>
   </div>
 
-  <!-- Netlify Deployment Help Modal -->
-  <div id="deployHelpModal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl border border-slate-100 space-y-4">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <div class="flex items-center space-x-2">
-          <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-          </span>
-          <h3 class="font-serif font-bold text-lg text-slate-800">Deploy in Seconds to Netlify</h3>
-        </div>
-        <button onclick="closeModal('deployHelpModal')" class="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
-        <p>This web app is completely self-contained in a single file and comes configured with <strong>Netlify Forms</strong> so you can gather RSVPs without any extra backend code.</p>
-
-        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-1">
-          <p class="font-bold text-slate-800">Step 1: Save this file</p>
-          <p class="text-slate-500">Save this code as <code>index.html</code> in a new folder on your computer.</p>
-        </div>
-
-        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-1">
-          <p class="font-bold text-slate-800">Step 2: Drag &amp; Drop onto Netlify Drop</p>
-          <p class="text-slate-500">Open <a href="https://app.netlify.com/drop" target="_blank" rel="noopener noreferrer" class="text-brand-600 underline font-semibold">app.netlify.com/drop</a> in your browser and drag the folder right into the browser.</p>
-        </div>
-
-        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-1">
-          <p class="font-bold text-slate-800">Step 3: Collect RSVPs</p>
-          <p class="text-slate-500">Your site gets an instant live URL (e.g. <code>baby-miller-shower.netlify.app</code>). Every time a guest fills out the RSVP form, their response will show up inside your Netlify site dashboard under <strong>Forms &gt; baby-shower-rsvp</strong>!</p>
-        </div>
-      </div>
-
-      <div class="pt-2 border-t border-slate-100 flex justify-end">
-        <button onclick="closeModal('deployHelpModal')" class="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold shadow-xs">Understood!</button>
-      </div>
-    </div>
-  </div>
-
   <script>
     // Event Configuration State
     let eventState = {
@@ -867,7 +824,7 @@
       const startStr = formatToUtcCompact(startDate);
       const endStr = formatToUtcCompact(endDate);
       const timestamp = formatToUtcCompact(new Date());
-      const uid = 'baby-shower-' + Date.now() + '@netlifyapp.com';
+      const uid = 'baby-shower-' + Date.now() + '@baby-shower-invite';
 
       const icsLines = [
         "BEGIN:VCALENDAR",
@@ -907,7 +864,65 @@
     }
 
 
-    /* RSVP form is handled natively by Netlify (no JS needed). */
+    /* ===== RSVP -> Google Forms =====
+       1. Create a Google Form with 5 questions (see SETUP.md).
+       2. Paste your form ID and the five entry IDs below.            */
+    const GOOGLE_FORM = {
+      formId: '1FAIpQLScIrmlh1n6AF092z9ainSN_lnh6eEelETsgEIMbbcSU2N_oCg',
+      fields: {
+        name:       'entry.877086558',
+        email:      'entry.1498135098',
+        attendance: 'entry.1424661284',
+        guests:     'entry.2606285',
+        message:    'entry.424425166'
+      }
+    };
+
+    const rsvpForm = document.getElementById('rsvpForm');
+    rsvpForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('rsvpSubmitBtn');
+      const alertBox = document.getElementById('rsvpSuccessAlert');
+      const showMsg = (ok, title, sub) => {
+        alertBox.className = 'mt-6 p-4 rounded-2xl text-center border ' + (ok
+          ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+          : 'bg-red-50 border-red-200 text-red-800');
+        alertBox.innerHTML = '<p class="font-bold text-sm">' + title + '</p><p class="text-xs mt-0.5">' + sub + '</p>';
+      };
+
+      // Honeypot: bots fill hidden fields, people do not
+      if (document.getElementById('bot-field').value) { rsvpForm.reset(); return; }
+
+      if (GOOGLE_FORM.formId.startsWith('YOUR_')) {
+        console.error('RSVP not connected: set GOOGLE_FORM.formId and field IDs in index.html');
+        showMsg(false, 'RSVP is not connected yet.', 'Please contact the hosts directly. Sorry for the trouble!');
+        return;
+      }
+
+      const f = GOOGLE_FORM.fields;
+      const att = document.getElementById('attendance');
+      const body = new URLSearchParams();
+      body.append(f.name, document.getElementById('guestName').value.trim());
+      body.append(f.email, document.getElementById('guestEmail').value.trim());
+      body.append(f.attendance, att.options[att.selectedIndex].text);
+      body.append(f.guests, document.getElementById('guestCount').value);
+      body.append(f.message, document.getElementById('rsvpNote').value.trim());
+
+      btn.disabled = true;
+      try {
+        // no-cors: Google does not allow reading the reply, so a sent request counts as success
+        await fetch('https://docs.google.com/forms/d/e/' + GOOGLE_FORM.formId + '/formResponse', {
+          method: 'POST', mode: 'no-cors', body
+        });
+        showMsg(true, 'Thank you! Your RSVP has been received.', 'We look forward to celebrating with you!');
+        rsvpForm.reset();
+        showToast('RSVP sent!');
+      } catch (err) {
+        showMsg(false, 'Sorry, your RSVP could not be sent.', 'Please check your connection and try again.');
+      } finally {
+        btn.disabled = false;
+      }
+    });
 
     let wishesStore = [];
 
