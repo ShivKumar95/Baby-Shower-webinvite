@@ -504,26 +504,49 @@
           <p class="text-slate-500 text-xs sm:text-sm mt-1" id="guestbook-description">Guess baby's arrival date or weight, and share heartfelt advice for the parents!</p>
         </div>
 
-        <form onsubmit="handleNewWish(event)" class="bg-white/80 p-5 rounded-2xl border border-slate-200/80 mb-8 max-w-xl mx-auto shadow-2xs">
+        <form id="guestbookForm" onsubmit="handleNewWish(event)" class="bg-white/80 p-5 rounded-2xl border border-slate-200/80 mb-5 max-w-xl mx-auto shadow-2xs">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
             <div>
-              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Your Name *</label>
-              <input type="text" id="wishName" required placeholder="Aunt Clara" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
+              <label for="wishName" class="block text-[11px] font-semibold text-slate-600 mb-1">Your Name *</label>
+              <input type="text" id="wishName" required autocomplete="name" placeholder="Your name" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-slate-600 mb-1">Baby Prediction (Optional)</label>
-              <input type="text" id="wishPrediction" placeholder="e.g. Nov 11 • 3.3 kg" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
+              <label for="wishGender" class="block text-[11px] font-semibold text-slate-600 mb-1">Gender Prediction</label>
+              <select id="wishGender" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
+                <option value="">Make a guess</option>
+                <option value="Boy">Boy</option>
+                <option value="Girl">Girl</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+            <div>
+              <label for="wishWeight" class="block text-[11px] font-semibold text-slate-600 mb-1">Birth Weight Guess</label>
+              <input type="text" id="wishWeight" placeholder="e.g. 3.2 kg" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
+            </div>
+            <div>
+              <label for="wishBabyNames" class="block text-[11px] font-semibold text-slate-600 mb-1">Baby Name Ideas</label>
+              <input type="text" id="wishBabyNames" placeholder="Share a name idea" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white">
             </div>
           </div>
           <div class="mb-3">
-            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Your Wish or Parenting Advice *</label>
-            <textarea id="wishContent" required rows="2" placeholder="Cherish the tiny snuggles and remember it takes a village!" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white resize-none"></textarea>
+            <label for="wishContent" class="block text-[11px] font-semibold text-slate-600 mb-1">Your Wish or Parenting Advice *</label>
+            <textarea id="wishContent" required rows="3" placeholder="Share a heartfelt wish or a little advice for the parents-to-be." class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white resize-y"></textarea>
           </div>
-          <button type="submit" class="w-full py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold shadow-xs transition flex items-center justify-center gap-1.5">
+          <button type="submit" id="wishSubmitBtn" class="w-full py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold shadow-xs transition flex items-center justify-center gap-1.5">
             <i class="fa-solid fa-heart"></i>
-            <span>Post Wish to Guestbook</span>
+            <span>Share with the Guestbook</span>
           </button>
         </form>
+
+        <p class="text-center mb-6">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScmfO_iXCJofzZu2g6Y2ajB-HzkKkjzYva54ukNa0XWVhA31Q/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-600 hover:text-brand-700 underline underline-offset-2">
+            <i class="fa-brands fa-google" aria-hidden="true"></i>
+            <span>Open the Google Form directly</span>
+          </a>
+        </p>
+
+        <p id="guestbookStatus" class="hidden max-w-xl mx-auto mb-6 text-center text-xs font-semibold" role="status" aria-live="polite"></p>
 
         <div id="wishesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
       </div>
@@ -924,6 +947,17 @@
       }
     });
 
+    const GUESTBOOK_FORM = {
+      formId: '1FAIpQLScmfO_iXCJofzZu2g6Y2ajB-HzkKkjzYva54ukNa0XWVhA31Q',
+      fields: {
+        name: 'entry.559352220',
+        gender: 'entry.877086558',
+        weight: 'entry.924523986',
+        babyNames: 'entry.186230675',
+        wish: 'entry.1751303409'
+      }
+    };
+
     let wishesStore = [];
 
     function renderWishes() {
@@ -940,26 +974,58 @@
             <span class="text-[10px] text-slate-400">${wish.date}</span>
           </div>
           ${wish.prediction ? `<p class="text-[11px] font-semibold text-brand-600 mb-1.5">${escapeHtml(wish.prediction)}</p>` : ''}
+          ${wish.babyNames ? `<p class="text-[11px] text-slate-500 mb-1">Name idea: ${escapeHtml(wish.babyNames)}</p>` : ''}
           <p class="text-xs text-slate-600 leading-relaxed italic">"${escapeHtml(wish.text)}"</p>
         `;
         grid.appendChild(card);
       });
     }
 
-    function handleNewWish(e) {
+    async function handleNewWish(e) {
       e.preventDefault();
       const name = document.getElementById('wishName').value.trim();
-      const prediction = document.getElementById('wishPrediction').value.trim();
+      const gender = document.getElementById('wishGender').value;
+      const weight = document.getElementById('wishWeight').value.trim();
+      const babyNames = document.getElementById('wishBabyNames').value.trim();
       const content = document.getElementById('wishContent').value.trim();
+      const form = document.getElementById('guestbookForm');
+      const button = document.getElementById('wishSubmitBtn');
+      const status = document.getElementById('guestbookStatus');
 
       if (!name || !content) return;
 
-      wishesStore.unshift({ author: name, prediction, text: content, date: "Just now" });
-      renderWishes();
-      document.getElementById('wishName').value = '';
-      document.getElementById('wishPrediction').value = '';
-      document.getElementById('wishContent').value = '';
-      showToast("Thank you for your warm wish!");
+      const fields = GUESTBOOK_FORM.fields;
+      const body = new URLSearchParams();
+      body.append(fields.name, name);
+      body.append(fields.gender, gender);
+      body.append(fields.weight, weight);
+      body.append(fields.babyNames, babyNames);
+      body.append(fields.wish, content);
+
+      button.disabled = true;
+      status.className = 'max-w-xl mx-auto mb-6 text-center text-xs font-semibold text-slate-500';
+      status.textContent = 'Sending your entry...';
+
+      try {
+        await fetch('https://docs.google.com/forms/d/e/' + GUESTBOOK_FORM.formId + '/formResponse', {
+          method: 'POST',
+          mode: 'no-cors',
+          body
+        });
+
+        const prediction = [gender, weight].filter(Boolean).join(' · ');
+        wishesStore.unshift({ author: name, prediction, babyNames, text: content, date: 'Just now' });
+        renderWishes();
+        form.reset();
+        status.className = 'max-w-xl mx-auto mb-6 text-center text-xs font-semibold text-emerald-700';
+        status.textContent = 'Thank you! Your prediction and wish have been recorded.';
+        showToast('Guestbook entry sent!');
+      } catch (err) {
+        status.className = 'max-w-xl mx-auto mb-6 text-center text-xs font-semibold text-red-700';
+        status.textContent = 'Your entry could not be sent. Please check your connection and try again.';
+      } finally {
+        button.disabled = false;
+      }
     }
 
     /* --- Host Customizer Save --- */
