@@ -435,9 +435,7 @@
           </div>
 
           <!-- Netlify Ready HTML Form with Honeypot Anti-Spam -->
-          <form id="rsvpForm" name="baby-shower-rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4">
-            <!-- Hidden inputs mandatory for Netlify form processing -->
-            <input type="hidden" name="form-name" value="baby-shower-rsvp">
+          <form id="rsvpForm" name="baby-shower-rsvp" method="POST" netlify netlify-honeypot="bot-field" class="space-y-4">
             <p class="hidden">
               <label>Do not fill this if you are human: <input name="bot-field" id="bot-field"></label>
             </p>
@@ -920,18 +918,7 @@
       showToast("Opening Yahoo Calendar...");
     }
 
-    /* --- Netlify Forms Submission & In-App Handling --- */
-    const rsvpForm = document.getElementById('rsvpForm');
-    rsvpForm.addEventListener('submit', function(e) {
-      // Show success feedback
-      document.getElementById('rsvpSuccessAlert').classList.remove('hidden');
-
-      // If running inside static preview / localhost without Netlify backend, prevent page reload
-      if (window.location.hostname === 'localhost' || window.location.hostname.includes('webcontainer') || !window.location.host) {
-        e.preventDefault();
-        showToast("RSVP recorded successfully! 🎉");
-      }
-    });
+    /* RSVP form is handled natively by Netlify (no JS needed). */
 
     let wishesStore = [];
 
