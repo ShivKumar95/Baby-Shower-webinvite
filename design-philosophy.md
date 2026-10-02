@@ -1,0 +1,13 @@
+# Lattice Devotion
+
+**Lattice Devotion** is an aesthetic of quiet repetition: the belief that reverence is expressed through patient, daily geometry rather than spectacle. Its forms descend from the threshold drawing, a grid of dots threaded with a single unbroken line, made at dawn and gone by dusk. Every composition is built as if on that invisible lattice. Dots hold the rhythm, outlines hold the breath, and nothing is placed that the grid has not already promised. The result is meticulously crafted work that rewards sustained looking.
+
+**Space and form** are governed by the roundel: a circle as a vessel, ringed by concentric lines of unequal weight, a heavy ring for gravity, a hairline for grace, a necklace of dots for pulse. Within the vessel a single object stands alone, centred, generous with air around it. Symmetry is not decoration but discipline; each mark has been balanced by a hand that has made the same gesture ten thousand times and still attends to it. The product of deep expertise looks effortless, and that is the point.
+
+**Colour** is rationed to four voices: a deep vermilion-maroon that carries weight, a burnished turmeric-gold that carries light, a warm unbleached cream that carries silence, and a single leaf-green used only where something grows. No gradients, no shadows, no ornament that cannot justify its stroke. Flat fields are crisp and confident, the way pigment sits on prepared ground, and every edge is painstakingly resolved so the work feels printed by a master, not generated.
+
+**Scale and rhythm** follow the logic of the garland: identical beads, strung at identical intervals, with a slightly larger bead at every fourth position to mark the count. Repetition is the content. A row of dots is a sentence; a ring of them is a prayer. Hierarchy comes from weight and distance, never from size alone, so that the smallest rendering retains the dignity of the largest.
+
+**Typography** is whispered. Thin, spaced capitals and monospaced reference numerals sit at the margins like specimen labels in an imaginary archive, cataloguing the marks as though each were a species worth documenting. Text names; it never explains. Registration crosses at the corners and a faint field of dots beneath everything suggest a system of observation, a quiet taxonomy of the ordinary made sacred through attention.
+
+**Craftsmanship** is the final law. Every curve has been drawn and redrawn, every spacing tested against its neighbours, every overlap eliminated, every margin protected. The finished piece should look as though it consumed countless hours of someone at the very top of their field, and then should hide that labour completely behind calm.
